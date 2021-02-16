@@ -47,8 +47,14 @@ function squareClickHandler(event) {
 }
 
 //variable and helper function for assigning alternating Xs and Os
-var lastLetter = 'O';
+var firstPlay = true;
+var lastLetter;
 function nextLetter(letter) {
+  if (firstPlay) {
+    lastLetter = 'X';
+    firstPlay = false;
+    return 'X';
+  }
   if (letter === 'X') {
     lastLetter = 'O';
     return 'O';
@@ -75,6 +81,7 @@ function resetClickHandler() {
     result[0].innerHTML = '';
     setBoardListeners();
     piecesPlaced = 0;
+    firstPlay = true;
   }
 }
 
