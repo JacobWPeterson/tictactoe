@@ -1,0 +1,38 @@
+body {
+  background: #000000;
+}
+
+table, tr, td {
+  margin: auto;
+  border: solid 2px black;
+  border-radius: 5px;
+}
+
+table {
+  background: grey;
+}
+
+th {
+  height: 50px;
+  background-color: white;
+  border: solid 2px #000000;
+  border-radius: 5px;
+}
+
+td {
+  width: 50px;
+  height: 50px;
+  border: solid 2px #ffffff;
+}
+
+td {
+  text-align: center;
+}
+
+th.result {
+  color: black;
+}
+
+button {
+  border: none;
+}
