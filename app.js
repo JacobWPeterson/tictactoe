@@ -1,24 +1,49 @@
+/*******************************************************
+Element variables
+*******************************************************/
+
 const squares = document.getElementsByTagName("td");
 const result = document.getElementsByClassName("result");
 const tableRows = document.getElementById("gameBoard").rows;
+const button = document.getElementById("reset");
 
 
-/*
 
-Adds event listeners on squares and handles the actions of assigning a letter to that square
 
-*/
+/*******************************************************
+
+Adds/removes event listeners on squares and handles the
+actions of assigning a letter to that square
+
+*******************************************************/
 
 //Adds listener to each square
-for (const square of squares) {
-  square.addEventListener("click", squareClickHandler);
+function setBoardListeners() {
+  for (const square of squares) {
+    square.addEventListener("click", squareClickHandler, {once: true});
+  }
+}
+setBoardListeners();
+
+//removes all event listeners following a winning combination
+function removeBoardListeners() {
+  for (const square of squares) {
+    square.removeEventListener("click", squareClickHandler);
+  }
 }
 
 //Handles click on square, delegating letter assignment to helper function and calling helper function to check for winner
 function squareClickHandler(event) {
+  piecesPlaced++;
   event.target.innerHTML = nextLetter(lastLetter);
-  checkWin(lastLetter);
-  checkFullBoard();
+  if (checkWin(lastLetter)) {
+    removeBoardListeners();
+    result[0].innerHTML = `${lastLetter} is the Winner`;
+  } else {
+    if (piecesPlaced === 9) {
+      result[0].innerHTML = 'It\'s a tie';
+    }
+  }
 }
 
 //variable and helper function for assigning alternating Xs and Os
@@ -34,12 +59,13 @@ function nextLetter(letter) {
 }
 
 
-/*
 
-Adds variable for reset button and event listeners and handlers for the button
+/*******************************************************
 
-*/
-const button = document.getElementById("reset");
+Adds variable for reset button and event
+listeners and handlers for the button
+
+*******************************************************/
 
 button.addEventListener('click', resetClickHandler);
 
@@ -47,20 +73,25 @@ function resetClickHandler() {
   for (const square of squares) {
     square.innerHTML = '';
     result[0].innerHTML = '';
+    setBoardListeners();
+    piecesPlaced = 0;
   }
 }
 
-/*
 
-Function and helpers for checking for a winner
 
-*/
+/*******************************************************
+
+Function and helpers for checking for a winner or ties
+
+*******************************************************/
+
+//keeps track of pieces played rather than helper fn to check for a full board
+var piecesPlaced = 0;
 
 //checks all three winning options
 function checkWin(piece) {
-  if (rowCheck(piece) || columnCheck(piece) || diagonalCheck(piece)) {
-    result[0].innerHTML = `${piece} is the Winner`;
-  }
+  return rowCheck(piece) || columnCheck(piece) || diagonalCheck(piece);
 }
 
 //checks for a row win
@@ -111,13 +142,4 @@ function diagonalCheck(piece) {
     }
 
   return hasDiagonalLine
-}
-
-/*
-
-Function and helpers for checking for a full board (i.e. no winner)
-
-*/
-function checkFullBoard() {
-
 }
