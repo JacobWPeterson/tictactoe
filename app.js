@@ -8,7 +8,7 @@ const tableRows = document.getElementById("gameBoard").rows;
 const button = document.getElementById("reset");
 
 
-
+console.log(result[0].innerHTML)
 
 /*******************************************************
 
@@ -51,14 +51,17 @@ var firstPlay = true;
 var lastLetter;
 function nextLetter(letter) {
   if (firstPlay) {
+    result[0].innerHTML = `0\'s Turn`;
     lastLetter = 'X';
     firstPlay = false;
     return 'X';
   }
   if (letter === 'X') {
+    result[0].innerHTML = `${lastLetter}\'s Turn`;
     lastLetter = 'O';
     return 'O';
   } else {
+    result[0].innerHTML = `${lastLetter}\'s Turn`;
     lastLetter = 'X';
     return 'X';
   }
@@ -78,7 +81,7 @@ button.addEventListener('click', resetClickHandler);
 function resetClickHandler() {
   for (const square of squares) {
     square.innerHTML = '';
-    result[0].innerHTML = '';
+    result[0].innerHTML = 'X to Play First';
     setBoardListeners();
     piecesPlaced = 0;
     firstPlay = true;
