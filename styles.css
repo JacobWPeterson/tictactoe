@@ -1,10 +1,11 @@
 body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background: #000000;
 }
 
 table, tr, td {
+  font-size: 5vw;
   margin: auto;
-  border: solid 2px black;
   border-radius: 5px;
 }
 
@@ -26,6 +27,9 @@ tr {
 }
 
 td {
+  font-size: 14vw;
+  line-height: 14vw;
+  padding: 0;
   width: 15vw;
   border: solid 2px #ffffff;
 }
@@ -35,12 +39,16 @@ td {
 }
 
 button {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: inherit;
+  font-size: 3.5vw;
   border: none;
 }
 
 .result {
   margin: auto;
   text-align: center;
+  font-size: 3.5vw;
   width: 50vw;
   color: white;
 }
