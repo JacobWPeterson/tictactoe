@@ -1,6 +1,7 @@
 const squares = document.getElementsByTagName("td");
-const result = document.getElementsByClassName("title");
+const result = document.getElementsByClassName("result");
 const tableRows = document.getElementById("gameBoard").rows;
+
 
 /*
 
@@ -45,6 +46,7 @@ button.addEventListener('click', resetClickHandler);
 function resetClickHandler() {
   for (const square of squares) {
     square.innerHTML = '';
+    result[0].innerHTML = '';
   }
 }
 
@@ -56,8 +58,8 @@ Function and helpers for checking for a winner
 
 //checks all three winning options
 function checkWin(piece) {
-  if (rowCheck(piece) || columnCheck(piece) || diagonalLine(piece)) {
-    window.alert(`${piece} is the Winner`);
+  if (rowCheck(piece) || columnCheck(piece) || diagonalCheck(piece)) {
+    result[0].innerHTML = `${piece} is the Winner`;
   }
 }
 
@@ -96,7 +98,7 @@ function columnCheck(piece) {
 }
 
 //checks for a diagonal win running from top-left to bottom-right and from bottom-left to top-right
-function diagonalLine(piece) {
+function diagonalCheck(piece) {
   var hasDiagonalLine = false;
   if ((tableRows[1].cells[0].innerHTML === piece
     && tableRows[2].cells[1].innerHTML === piece
